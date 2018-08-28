@@ -5,8 +5,6 @@ public class Game {
     private int itsCurrentFrame = 1;
     private boolean firstThrowInFrame = true;
     private int ball;
-    private int firstThrow;
-    private int secondThrow;
 
     public int score(){
         return scoreForFrame(itsCurrentFrame - 1);
@@ -33,9 +31,9 @@ public class Game {
         int score = 0;
         ball = 0;
         for (int currentFrame = 0; currentFrame < theFrame; currentFrame++){
-            firstThrow = itsThrows[ball++];
-            if (firstThrow ==  10){
-                score += 10 + itsThrows[ball] + itsThrows[ball+1];
+            if (strike()){
+                ball++;
+                score += 10 + nextTwoBalls();
             }else{
                 score += handleSecondThrow();
             }
@@ -43,15 +41,35 @@ public class Game {
         return score;
     }
 
+    private boolean strike(){
+        return itsThrows[ball] == 10;
+    }
+
+    private int nextTwoBalls(){
+        return itsThrows[ball] + itsThrows[ball+1];
+    }
+
     public int handleSecondThrow(){
         int score = 0;
-        secondThrow = itsThrows[ball++];
-        int frameScore = firstThrow + secondThrow;
-        if (frameScore == 10)
-            score += frameScore + itsThrows[ball];
-        else
-            score += frameScore;
+        if (spare()) {
+            ball += 2;
+            score += 10 + nextBall();
+        }else {
+            score += towBallsInFrame();
+            ball += 2;
+        }
         return score;
+    }
+
+    private int towBallsInFrame(){
+        return itsThrows[ball] + itsThrows[ball+1];
+    }
+
+    private boolean spare(){
+        return (itsThrows[ball] + itsThrows[ball+1]) == 10;
+    }
+    private int nextBall(){
+        return itsThrows[ball];
     }
 
     public int getCurrentFrame(){
