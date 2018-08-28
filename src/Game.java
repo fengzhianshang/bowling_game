@@ -14,7 +14,13 @@ public class Game {
         int score = 0;
         int ball = 0;
         for (int currentFrame = 0; currentFrame < theFrame; currentFrame++){
-            score += itsThrows[ball++] + itsThrows[ball++];
+            int firstThrow = itsThrows[ball++];
+            int secondThrow = itsThrows[ball++];
+            int frameScore = firstThrow + secondThrow;
+            if (frameScore == 10)
+                score += frameScore + itsThrows[ball++];
+            else
+                score += frameScore;
         }
         return score;
     }
