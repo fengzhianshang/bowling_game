@@ -51,4 +51,13 @@ public class TestGame extends TestCase {
         assertEquals(13, g.scoreForFrame(1));
         assertEquals(18, g.scoreForFrame(2));
     }
+
+    public void test(){
+        g.add(10);
+        g.add(3);
+        g.add(6);
+        assertEquals(19, g.scoreForFrame(1));
+        assertEquals(28, g.score());
+        assertEquals(3, g.getCurrentFrame());
+    }
 }
