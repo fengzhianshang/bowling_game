@@ -2,21 +2,24 @@ public class Game {
     private int itsScore = 0;
     private int[] itsThrows = new int[21];
     private int itsCurrentThrow = 0;
-    private int itsCurrentFrame = 0;
+    private int itsCurrentFrame = 1;
     private Boolean firstThrow = true;
 
     public int score(){
-        return itsScore;
+        return scoreForFrame(itsCurrentFrame - 1);
     }
     public void add(int pins){
         itsThrows[itsCurrentThrow++] = pins;
         itsScore += pins;
+        adjustCurrentFrame();
+    }
+    private void adjustCurrentFrame(){
         if (firstThrow == true){
             firstThrow = false;
-            itsCurrentFrame++;
         }else
         {
             firstThrow = true;
+            itsCurrentFrame++;
         }
     }
     public int scoreForFrame(int theFrame){
