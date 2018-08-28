@@ -11,8 +11,8 @@ public class TestFrame extends TestCase{
     }
 
     public void testAddOneThrow(){
-        Frame f = new Frame();
-        f.add(5);
-        assertEquals(5, f.getScore());
+        Game g = new Game();
+        g.add(5);
+        assertEquals(5, g.score());
     }
 }
